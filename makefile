@@ -19,4 +19,4 @@ docker-build:
 
 .PHONY: docker-run
 docker-run:
-	docker -it -d --rm --name phaser phaser:0.0.1
+	docker run -it -d --rm --name phaser -p 8080:80 phaser:0.0.1

@@ -1,16 +1,13 @@
-FROM node:14-alpine AS builder
+FROM --platform=linux/amd64 node:21 AS builder
 
+# dependencies
 WORKDIR /code
-COPY package.json .
+COPY ./package.json ./package-lock.json ./
 RUN npm install 
 
-# TODO only copy source files
-# COPY ./.eslintignore ./.eslintignore
-# COPY ./.eslintrc.cjs ./.eslintrc.cjs
-# COPY ./public ./public
-# COPY ./src ./src
-# COPY ./index.html ./index.html
-# COPY ./tsconfig.json ./tsconfig.json
-# COPY ./vite.config.ts ./vite.config.ts
+# build
 COPY . . 
 RUN npm run build
+
+FROM nginx:1.25.3-alpine
+COPY --from=builder /code/dist/ /usr/share/nginx/html/
