@@ -4,7 +4,7 @@ import HelloWorldScene from './HelloWorldScene'
 
 const config: Phaser.Types.Core.GameConfig = {
 
-	type: Phaser.WEBGL,
+	type: Phaser.AUTO,
 	scale: {
 		mode: Phaser.Scale.FIT,
 		autoCenter: Phaser.Scale.CENTER_BOTH,
